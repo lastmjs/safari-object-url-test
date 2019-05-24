@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <button onclick="fetchAndSetAudio()">Fetch and set audio</button>
+
+        <script>
+            async function fetchAndSetAudio() {
+                const response = await window.fetch('https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/Alexander_Graham_Bell%27s_Voice.ogg/Alexander_Graham_Bell%27s_Voice.ogg.mp3');
+
+                const audioArrayBuffer = await response.arrayBuffer();
+                const audioBlob = new Blob([audioArrayBuffer]);
+                const audioObjectURL = window.URL.createObjectURL(audioBlob);
+
+                const audioElement = document.createElement('audio');
+
+                audioElement.setAttribute('controls', true);
+                document.body.appendChild(audioElement);
+
+                const sourceElement = document.createElement('source');
+
+                audioElement.appendChild(sourceElement);
+
+                sourceElement.src = audioObjectURL;
+                sourceElement.type = 'audio/mp3';
+            }
+        </script>
+    </body>
+</html>
