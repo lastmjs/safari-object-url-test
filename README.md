@@ -1,0 +1,1 @@
+# safari-object-url-test
